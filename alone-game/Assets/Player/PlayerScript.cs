@@ -11,6 +11,10 @@ public class Player: MonoBehaviour
     public PlayerMovingState MovingState { get; set; }
     #endregion
 
+    #region Inventory
+    //handles player inventory, health, and stuff. 
+    private Inventory inventory;
+    #endregion
 
     public bool IsMoving { get; set; }
     
@@ -20,6 +24,8 @@ public class Player: MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine);
         MovingState = new PlayerMovingState(this, StateMachine);
+
+        inventory = new Inventory();
     }
 
     void Start()
