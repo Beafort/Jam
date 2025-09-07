@@ -10,6 +10,10 @@ public class Player: MonoBehaviour
     public PlayerIdleState IdleState { get; set; }    
     public PlayerMovingState MovingState { get; set; }
     #endregion
+
+
+    public bool IsMoving { get; set; }
+    
     public void Awake()
     {
         StateMachine = new StateMachine();
@@ -25,6 +29,7 @@ public class Player: MonoBehaviour
     void Update()
     {
         StateMachine.CurrentPlayerState?.FrameUpdate();
+        
     }
 
     private void FixedUpdate()
