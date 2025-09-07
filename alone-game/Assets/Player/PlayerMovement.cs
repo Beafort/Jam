@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5f;
     private Rigidbody2D rb;
-    private Vector2 moveDiretion;
+    public Vector2 MoveDiretion { get; private set; }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -15,11 +15,11 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        rb.linearVelocity = moveDiretion * moveSpeed;    
+        rb.linearVelocity = MoveDiretion * moveSpeed;    
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        moveDiretion = context.ReadValue<Vector2>();
+        MoveDiretion = context.ReadValue<Vector2>();
     }
 }
