@@ -11,11 +11,13 @@ public class ItemWorld : MonoBehaviour
     }
     public static ItemWorld SpawnItemWorld(Vector3 pos, Item item)
     {
+        Debug.Log("In ItemWOrld");
         Transform transform = Instantiate(Items.Instance.itemWorldRender, pos, Quaternion.identity);
-
+        Debug.Log("In ItemWOrld1");
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
+        if (itemWorld == null) { Debug.Log("IW null"); }
         itemWorld.SetItem(item);
-
+        Debug.Log("In ItemWOrld2");
         return itemWorld;
     }
     public void SetItem(Item item)

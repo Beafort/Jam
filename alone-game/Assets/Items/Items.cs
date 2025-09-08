@@ -12,7 +12,7 @@ public class Items : MonoBehaviour
     }
     
     [SerializeField] private List<Item> allItems = new List<Item>();
-    public static Item placeholder;
+    public Item placeholder;
     public Transform itemWorldRender;
     public Item GetItem(Item.Type type)
     {

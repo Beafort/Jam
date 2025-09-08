@@ -82,3 +82,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ecf21ece37ce2144594c4a98f72cac77, type: 2}
   - {fileID: 11400000, guid: 9fabd85546438214692e5e6447434d1b, type: 2}
   - {fileID: 11400000, guid: 006ba78dd6da2b345855da4b84dc04b9, type: 2}
+  placeholder: {fileID: 11400000, guid: 006ba78dd6da2b345855da4b84dc04b9, type: 2}
+  itemWorldRender: {fileID: 4089684046557084945, guid: e275e8b1c02c7ac47bf0430828df4010, type: 3}

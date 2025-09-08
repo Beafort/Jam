@@ -28,6 +28,9 @@ public class Player: MonoBehaviour
 
         inventory = new Inventory();
         inventoryUI.SetInventory(inventory);
+
+        if (Items.Instance == null) Debug.Log("items inst null");
+        if (Items.Instance.GetItem(Item.Type.Healing1) == null) Debug.Log("Null Item");
         ItemWorld.SpawnItemWorld(new Vector3(1, 1), Items.Instance.GetItem(Item.Type.Healing1));
     }
 

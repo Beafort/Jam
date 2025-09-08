@@ -36,7 +36,7 @@ public class uiInventory : MonoBehaviour
                 if (img != null)
                 {
                 
-                    if (item != null && item != Items.placeholder)
+                    if (item != null && item != Items.Instance.placeholder)
                     {
                         img.sprite = item.itemSprite;
                         img.color = Color.white;

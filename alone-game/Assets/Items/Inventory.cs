@@ -14,7 +14,10 @@ public class Inventory
 
         for (int i = 0; i < maxInventoryItem; i++)
         {
-            itemList.Add(Items.placeholder);
+            if (Items.Instance == null) Debug.Log("Instance null");
+            if (Items.Instance.placeholder == null) Debug.Log("placeholder null");
+            if (itemList == null) Debug.Log("Item List null");
+            itemList.Add(Items.Instance.placeholder);
         }
 
         addItem(Items.Instance.GetItem(Item.Type.Healing1), 3);
@@ -27,7 +30,7 @@ public class Inventory
     public Item addItem(Item item)
     {
         for (int i = 0; i < itemList.Count; i++) {
-            if (itemList[i] == null || itemList[i] == Items.placeholder)
+            if (itemList[i] == null || itemList[i] == Items.Instance.placeholder)
             {
                 return addItem(item, i);
             }
