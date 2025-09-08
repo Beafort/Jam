@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-
 using NUnit.Framework;
 using UnityEngine;
 
@@ -7,6 +7,7 @@ public class Inventory
 {
     private static int maxInventoryItem = 10;
     private List<Item> itemList;
+    public event EventHandler OnItemListChanged;
 
     public Inventory() //init inventory
     {
@@ -45,6 +46,7 @@ public class Inventory
         Item item1 = new Item();
         item1 = itemList[idx];
         itemList[idx] = item;
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
         Debug.Log("Added: " + item.name + " at " + idx);
         return item1;
     }

@@ -24,8 +24,17 @@ public class ItemWorld : MonoBehaviour
     {
         this.item = item;
         spriteRenderer.sprite = item.itemSprite;
+       
+        BoxCollider2D bc = GetComponent<BoxCollider2D>();
+
+        if (spriteRenderer.sprite != null)
+        {
+            bc.size = spriteRenderer.sprite.bounds.size;
+            bc.offset = spriteRenderer.sprite.bounds.center;
+        }
+
     }
-    
+
     public Item GetItem() { return item; }
     public void DestroySelf()
     {

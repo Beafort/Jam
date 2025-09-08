@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,13 +17,15 @@ public class uiInventory : MonoBehaviour
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
+        inventory.OnItemListChanged += Inventory_OnItemListChanged;
     }
-    private void Update()
+
+    private void Inventory_OnItemListChanged(object sender, EventArgs e)
     {
-        if (inventory == null || slotParent == null) return;
-        UpdateUI();
+        UpdateInventoryUI();
     }
-    private void UpdateUI()
+
+    private void UpdateInventoryUI()
     {
         int idx = 0;
         foreach (Transform slot in slotParent)
