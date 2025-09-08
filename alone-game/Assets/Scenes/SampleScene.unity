@@ -475,6 +475,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6854606392998092747, guid: 871e37f1b949c054f8ca6087394c7c25, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7376131516463661163, guid: 871e37f1b949c054f8ca6087394c7c25, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -765,9 +769,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1752182945}
   - {fileID: 619394802}
   - {fileID: 468838078}
   - {fileID: 712000820}
   - {fileID: 642811164}
   - {fileID: 484574726}
-  - {fileID: 1752182945}

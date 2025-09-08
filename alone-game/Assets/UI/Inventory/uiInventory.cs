@@ -28,9 +28,9 @@ public class uiInventory : MonoBehaviour
         foreach (Transform slot in slotParent)
         {
             Image img = slot.GetComponentInChildren<Image>();
-            if (idx < inventory.getItemList().Count)
+            if (idx < inventory.GetItemList().Count)
             {
-                Item item = inventory.getItemList()[idx];
+                Item item = inventory.GetItemList()[idx];
                 if (item == null) Debug.Log("Item null");
                 if (img == null) Debug.Log("Img null");
                 if (img != null)

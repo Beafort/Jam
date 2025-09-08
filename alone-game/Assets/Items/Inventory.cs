@@ -20,25 +20,25 @@ public class Inventory
             itemList.Add(Items.Instance.placeholder);
         }
 
-        addItem(Items.Instance.GetItem(Item.Type.Healing1), 3);
-        addItem(Items.Instance.GetItem(Item.Type.Armor1), 0);
-        addItem(Items.Instance.GetItem(Item.Type.Coin1));
+        AddItem(Items.Instance.GetItem(Item.Type.Healing1), 3);
+        AddItem(Items.Instance.GetItem(Item.Type.Armor1), 0);
+        AddItem(Items.Instance.GetItem(Item.Type.Coin1));
         //addItem(new Item { itemType = })
         Debug.Log("Inventory Started!\n");
     }
 
-    public Item addItem(Item item)
+    public Item AddItem(Item item)
     {
         for (int i = 0; i < itemList.Count; i++) {
             if (itemList[i] == null || itemList[i] == Items.Instance.placeholder)
             {
-                return addItem(item, i);
+                return AddItem(item, i);
             }
         }
         
         return null;
     }
-    public Item addItem(Item item, int idx)
+    public Item AddItem(Item item, int idx)
     {
         if (idx >= maxInventoryItem) return null; //no item cahnged
 
@@ -49,5 +49,5 @@ public class Inventory
         return item1;
     }
 
-    public IReadOnlyList<Item> getItemList() {return itemList;}
+    public IReadOnlyList<Item> GetItemList() { return itemList; }
 }

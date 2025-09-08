@@ -15,7 +15,7 @@ public class PlayerIdleState : PlayerState
         {
             stateMachine.ChangeState(player.MovingState);
         }
-        Debug.Log("Idling");
+        //Debug.Log("Idling");
     
     }
 }
