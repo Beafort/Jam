@@ -844,13 +844,13 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4501933818674626175}
   - {fileID: 1542595833961602761}
+  - {fileID: 4501933818674626175}
   m_Father: {fileID: 2729629127027376412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -673.1, y: 0}
+  m_AnchoredPosition: {x: 561, y: 322}
   m_SizeDelta: {x: 877, y: 617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3063807755241344536
@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89869208ba9772e4399ed8f006defe5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  playerFirstBar: {fileID: 2824122761448578264}
+  playerFirstBar: {fileID: 0}
   playerSecondBar: {fileID: 2472286471922251801}
   dialogue: {fileID: 3440968835530074793}
 --- !u!1 &5622306598858735440
@@ -1241,8 +1241,8 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 2444619408734911141}
   - {fileID: 1861861346044417770}
+  - {fileID: 2444619408734911141}
   m_Father: {fileID: 2729629127027376412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleHUD
   nameText: {fileID: 1208456044195921386}
-  hp: {fileID: 4082038221683070978}
+  HPbar: {fileID: 0}
 --- !u!1 &7999540160213772728
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,11 +2006,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 760
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 359.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2060,19 +2060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44cf0580cc81f4daa2bd263e68f08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::barManager
---- !u!114 &2824122761448578264 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7098693545519366781, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
-  m_PrefabInstance: {fileID: 5022336684939189925}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d44cf0580cc81f4daa2bd263e68f08e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::barManager
---- !u!4 &4501933818674626175 stripped
-Transform:
+--- !u!224 &4501933818674626175 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
   m_PrefabInstance: {fileID: 5022336684939189925}
   m_PrefabAsset: {fileID: 0}
@@ -2102,11 +2091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 760
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 359.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2145,19 +2134,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
---- !u!4 &2444619408734911141 stripped
-Transform:
+--- !u!224 &2444619408734911141 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 8919652220591251674, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
   m_PrefabInstance: {fileID: 6495861962704345727}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4082038221683070978 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7098693545519366781, guid: c88be0c85a4839644aa91015f3f18211, type: 3}
-  m_PrefabInstance: {fileID: 6495861962704345727}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d44cf0580cc81f4daa2bd263e68f08e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::barManager
