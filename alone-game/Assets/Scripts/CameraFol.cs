@@ -65,7 +65,7 @@ public class CameraFollow2D : MonoBehaviour
     {
         float intensity = 0f;
 
-        if (Sanity <= 65 && Sanity > 40) intensity = 0.05f;
+        if (Sanity <= 70 && Sanity > 40) intensity = 0.05f;
         else if (Sanity <= 40 && Sanity > 15) intensity = 0.1f;
         else if (Sanity <= 15) intensity = 0.2f;
 
