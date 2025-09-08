@@ -18,6 +18,10 @@ public class Player: MonoBehaviour
     [SerializeField] private uiInventory inventoryUI;
     #endregion
 
+    #region Player Data
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private BarManager healthBar;
+    #endregion
     public bool IsMoving { get; set; }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -51,7 +55,8 @@ public class Player: MonoBehaviour
         inventoryUI.SetPlayer(this);
         if (Items.Instance == null) Debug.Log("items inst null");
         if (Items.Instance.GetItem(Item.Type.Healing1) == null) Debug.Log("Null Item");
-       
+
+        healthBar.Init(maxHealth);
     }
 
     public Vector3 GetPosition()
@@ -65,6 +70,7 @@ public class Player: MonoBehaviour
             return Vector3.zero;
         }
     }
+    public float GetHealth() => healthBar.GetBarCurrVal();
 
     void Start()
     {
