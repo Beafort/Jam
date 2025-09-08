@@ -13,11 +13,6 @@ public class CombatManager : MonoBehaviour
     private TextMeshProUGUI dialogue;
 
 
-    private void Start()
-    {
-        
-    }
-
 
     public void FirstButton()
     {
