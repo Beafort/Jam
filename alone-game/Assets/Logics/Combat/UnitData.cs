@@ -5,6 +5,6 @@ public class UnitData : ScriptableObject
 {
     public string unitName;
     public int maxHP;
+    public int currentHP;
     public int damage;
-    public Sprite unitSprite;
 }

@@ -15,7 +15,7 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-        dialogue.text = "Hello";
+        
     }
 
 
