@@ -839,6 +839,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::uiInventory
   slotParent: {fileID: 6475181572820135068}
+  normalOutlineSprite: {fileID: 5670179219244248295, guid: 1bf28f54c73424b49ac049071ba4270d, type: 3}
+  chosenOutlineSprite: {fileID: -8711176212393126692, guid: 6f0faef48d4e8d54ba8d7ee106862be8, type: 3}
+  currIdx: 0
 --- !u!1 &9086235063150092439
 GameObject:
   m_ObjectHideFlags: 0

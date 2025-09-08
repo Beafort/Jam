@@ -48,19 +48,10 @@ public class Player: MonoBehaviour
 
         inventory = new Inventory();
         inventoryUI.SetInventory(inventory);
-
+        inventoryUI.SetPlayer(this);
         if (Items.Instance == null) Debug.Log("items inst null");
         if (Items.Instance.GetItem(Item.Type.Healing1) == null) Debug.Log("Null Item");
        
-        ItemWorld.SpawnItemWorld(new Vector3(2, 2), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(3, 3), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(1, 2), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(1, 3), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(1, -1), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(1, -2), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(1, -3), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(2, 1), Items.Instance.GetItem(Item.Type.Healing1));
-        ItemWorld.SpawnItemWorld(new Vector3(3, 1), Items.Instance.GetItem(Item.Type.Healing1));
     }
 
     void Start()

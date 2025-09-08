@@ -1,11 +1,12 @@
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
+using static UnityEditor.Progress;
 
-public class Inventory 
+public class Inventory
 {
-    private static int maxInventoryItem = 10;
+    public static int maxInventoryItem = 10;
     private List<Item> itemList;
     public event EventHandler OnItemListChanged;
 
@@ -28,6 +29,7 @@ public class Inventory
         Debug.Log("Inventory Started!\n");
     }
 
+
     public Item AddItem(Item item)
     {
         for (int i = 0; i < itemList.Count; i++) {
@@ -36,12 +38,12 @@ public class Inventory
                 return AddItem(item, i);
             }
         }
-        
+
         return null;
     }
     public Item AddItem(Item item, int idx)
     {
-        if (idx >= maxInventoryItem) return null; //no item cahnged
+        if (idx >= maxInventoryItem || idx < 0) return null; //no item cahnged
 
         Item item1 = new Item();
         item1 = itemList[idx];
@@ -51,5 +53,16 @@ public class Inventory
         return item1;
     }
 
+    public Item RemoveItem(int idx)
+    {
+        if (idx >= maxInventoryItem || idx < 0) return null;
+
+        Item item1 = new Item();
+        item1 = itemList[idx];
+        itemList[idx] = Items.Instance.placeholder;
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        Debug.Log("Removed: " + item1.name + " at " + idx);
+        return item1;
+    }
     public IReadOnlyList<Item> GetItemList() { return itemList; }
 }

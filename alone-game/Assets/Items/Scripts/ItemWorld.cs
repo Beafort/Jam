@@ -4,7 +4,7 @@ public class ItemWorld : MonoBehaviour
 {
     private Item item;
     private SpriteRenderer spriteRenderer;
-
+    private static readonly float randDistance = 1f;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -19,6 +19,14 @@ public class ItemWorld : MonoBehaviour
         itemWorld.SetItem(item);
         Debug.Log("In ItemWOrld2");
         return itemWorld;
+    }
+
+    public static ItemWorld DropItem(Vector3 pos, Item item)
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+        Vector3 randDir = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+        randDir *= randDistance;
+        return SpawnItemWorld(pos+randDir, item);
     }
     public void SetItem(Item item)
     {
