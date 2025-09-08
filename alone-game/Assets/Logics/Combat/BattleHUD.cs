@@ -8,11 +8,11 @@ public class BattleHUD : MonoBehaviour
 {
     public TMP_Text nameText;
    
-    public BarManager hp;
+    public BarManager HPbar;
 
-    public void setHUD(Unit unit)
+    public void SetHUD(Unit unit)
     {
-        nameText.text = unit.data.unitName;
+        nameText.text = unit.data.UnitName;
         
     }
 }

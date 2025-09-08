@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 public class BattleSystem : MonoBehaviour
@@ -44,10 +45,10 @@ public class BattleSystem : MonoBehaviour
 
         // Set UI
 
-        dialogueText.text = "A wild " + enemyUnit.data.unitName + " approches...";
+        dialogueText.text = "A wild " + enemyUnit.data.UnitName + " approches...";
 
-        playerHUD.setHUD(playerUnit);
-        enemyHUD.setHUD(enemyUnit);
+        playerHUD.SetHUD(playerUnit);
+        enemyHUD.SetHUD(enemyUnit);
         //playerNameText.text = playerUnit.data.unitName;
         //enemyNameText.text = enemyUnit.data.unitName;
 
@@ -73,12 +74,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.data.damage);
+        enemyUnit.TakeDamage(playerUnit.Damage);
         //enemyHPText.text = $"{enemyUnit.currentHP}/{enemyUnit.data.maxHP}";
 
         yield return new WaitForSeconds(1f);
 
-        if (isDead)
+        if (enemyUnit.IsDead())
         {
             state = BattleState.WON;
             EndBattle();
@@ -94,12 +95,12 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        bool isDead = playerUnit.TakeDamage(enemyUnit.data.damage);
+        playerUnit.TakeDamage(enemyUnit.Damage);
         //playerHPText.text = $"{playerUnit.currentHP}/{playerUnit.data.maxHP}";
 
         yield return new WaitForSeconds(1f);
 
-        if (isDead)
+        if (playerUnit.IsDead())
         {
             state = BattleState.LOST;
             EndBattle();
