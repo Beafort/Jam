@@ -4,21 +4,29 @@ using UnityEngine.UI;
 public class BarManager : MonoBehaviour
 {
     public Image bar;
-    static float maxBarVal = 100f;
-    public float barVal = maxBarVal;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private float maxBarVal;
+    private float barVal;
 
-    // Update is called once per frame
     void Update()
     {
         bar.fillAmount = barVal / maxBarVal;
     }
-
-    public void ChangeBar(float value)
+    /// <summary>
+    /// Bars should be initialized with this function.
+    /// If <paramref name="currentValue"/> is not provided or is null,
+    /// the bar will default to <paramref name="maxValue"/>.
+    /// </summary>
+    /// <param name="maxValue">The maximum value of the bar.</param>
+    /// <param name="currentValue">
+    /// The current value of the bar. Can be null to default to maxValue.
+    /// </param>
+    public void Init(float maxValue, float? currentValue = null)
+    {
+        maxBarVal = maxValue;
+        barVal = currentValue ?? maxBarVal;
+        bar.fillAmount = barVal / maxBarVal;
+    }
+    private void ChangeBar(float value)
     {
         barVal += value;
         barVal = Mathf.Clamp(barVal, 0, maxBarVal);
