@@ -8,14 +8,15 @@ using Unity.VisualScripting;
 
 public class BattleSystem : MonoBehaviour
 {
-    public Unit playerPrefab;
-    public Unit enemyPrefab;
+    //TODO: Figure out a way to transfer the data of the player 
+    public Sprite PlayerSprite;
+    public Sprite EnemySprite;
 
-    public Transform playerBattleStation;
-    public Transform enemyBattleStation;
+    public SpriteRenderer PlayerRenderer;
+    public SpriteRenderer EnemyRenderer;
 
-    Unit playerUnit;
-    Unit enemyUnit;
+    public Unit playerUnit;
+    public Unit enemyUnit;
 
     //public TMP_Text playerNameText;
     //public TMP_Text playerHPText;
@@ -40,15 +41,14 @@ public class BattleSystem : MonoBehaviour
     void SetupBattle()
     {
         // Spawn units
-        playerUnit = Instantiate(playerPrefab, playerBattleStation);
-        enemyUnit = Instantiate(enemyPrefab, enemyBattleStation);
-
+        PlayerRenderer.sprite = PlayerSprite;
+        EnemyRenderer.sprite = EnemySprite; 
         // Set UI
 
         dialogueText.text = "A wild " + enemyUnit.data.UnitName + " approches...";
 
-        playerHUD.SetHUD(playerUnit);
-        enemyHUD.SetHUD(enemyUnit);
+        playerHUD.InitHUD(playerUnit);
+        enemyHUD.InitHUD(enemyUnit);
         //playerNameText.text = playerUnit.data.unitName;
         //enemyNameText.text = enemyUnit.data.unitName;
 
@@ -69,12 +69,13 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYERTURN) return;
 
         attackButton.interactable = false;
-        StartCoroutine(PlayerAttack());
+        StartCoroutine(PlayerAttack(playerUnit.Damage));
     }
 
-    IEnumerator PlayerAttack()
+    IEnumerator PlayerAttack(int damage)
     {
-        enemyUnit.TakeDamage(playerUnit.Damage);
+        enemyUnit.TakeDamage(damage);
+        enemyHUD.DecreaseHP(damage);
         //enemyHPText.text = $"{enemyUnit.currentHP}/{enemyUnit.data.maxHP}";
 
         yield return new WaitForSeconds(1f);
@@ -87,15 +88,16 @@ public class BattleSystem : MonoBehaviour
         else
         {
             state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            StartCoroutine(EnemyTurn(enemyUnit.Damage));
         }
     }
 
-    IEnumerator EnemyTurn()
+    IEnumerator EnemyTurn(int damage)
     {
         yield return new WaitForSeconds(1f);
 
-        playerUnit.TakeDamage(enemyUnit.Damage);
+        playerUnit.TakeDamage(damage);
+        playerHUD.DecreaseHP(damage);
         //playerHPText.text = $"{playerUnit.currentHP}/{playerUnit.data.maxHP}";
 
         yield return new WaitForSeconds(1f);
