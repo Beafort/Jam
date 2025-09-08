@@ -18,7 +18,8 @@ public class Inventory
         }
 
         addItem(Items.Instance.GetItem(Item.Type.Healing1), 3);
-        addItem(Items.Instance.GetItem(Item.Type.Armor1), 3);
+        addItem(Items.Instance.GetItem(Item.Type.Armor1), 0);
+        addItem(Items.Instance.GetItem(Item.Type.Coin1));
         //addItem(new Item { itemType = })
         Debug.Log("Inventory Started!\n");
     }
@@ -26,7 +27,7 @@ public class Inventory
     public Item addItem(Item item)
     {
         for (int i = 0; i < itemList.Count; i++) {
-            if (itemList[i] != null && itemList[i] != Items.placeholder)
+            if (itemList[i] == null || itemList[i] == Items.placeholder)
             {
                 return addItem(item, i);
             }
@@ -37,10 +38,11 @@ public class Inventory
     public Item addItem(Item item, int idx)
     {
         if (idx >= maxInventoryItem) return null; //no item cahnged
-        
+
         Item item1 = new Item();
         item1 = itemList[idx];
         itemList[idx] = item;
+        Debug.Log("Added: " + item.name + " at " + idx);
         return item1;
     }
 

@@ -31,9 +31,11 @@ public class uiInventory : MonoBehaviour
             if (idx < inventory.getItemList().Count)
             {
                 Item item = inventory.getItemList()[idx];
-
+                if (item == null) Debug.Log("Item null");
+                if (img == null) Debug.Log("Img null");
                 if (img != null)
                 {
+                
                     if (item != null && item != Items.placeholder)
                     {
                         img.sprite = item.itemSprite;

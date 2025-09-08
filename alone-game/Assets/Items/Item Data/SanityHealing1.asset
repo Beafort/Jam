@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SanityHealing1
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemType: 1
-  amount: 0
-  itemSprite: {fileID: 0}
+  amount: 1
+  itemSprite: {fileID: -5099149814585493839, guid: 5af0a6472dc2ae44485c9ae1cb99bf97, type: 3}

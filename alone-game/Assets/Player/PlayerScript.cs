@@ -14,6 +14,7 @@ public class Player: MonoBehaviour
     #region Inventory
     //handles player inventory, health, and stuff. 
     private Inventory inventory;
+    [SerializeField] private uiInventory inventoryUI;
     #endregion
 
     public bool IsMoving { get; set; }
@@ -26,6 +27,7 @@ public class Player: MonoBehaviour
         MovingState = new PlayerMovingState(this, StateMachine);
 
         inventory = new Inventory();
+        inventoryUI.SetInventory(inventory);
         //ItemWorld.SpawnItemWorld(new Vector3(1, 1), Items.GetItem(Item.ItemType.Healing1));
     }
 
