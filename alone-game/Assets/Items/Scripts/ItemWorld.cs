@@ -4,7 +4,7 @@ public class ItemWorld : MonoBehaviour
 {
     private Item item;
     private SpriteRenderer spriteRenderer;
-    private static readonly float randDistance = 1f;
+    private static readonly float randDistance = 2f;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

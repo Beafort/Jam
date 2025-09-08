@@ -1,21 +1,22 @@
 using System;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class uiInventory : MonoBehaviour
 {
     private Inventory inventory;
-    private Player player; 
+    [SerializeField] private Player player;
     [SerializeField] private Transform slotParent;
     [SerializeField] private Sprite normalOutlineSprite;
     [SerializeField] private Sprite chosenOutlineSprite;
-    [SerializeField] private int currIdx = 0;
+    private int currIdx = 0;
 
     public event EventHandler OnCurrIdxChange;
-    private void Awake()
+    private void Start()
     {
-        
+        UpdateInventoryUI();
     }
 
     public void SetPlayer(Player player)
@@ -30,13 +31,19 @@ public class uiInventory : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
+            Debug.Log("Moved right");
             UpdateCurrIdx(1);
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
+            Debug.Log("Moved left");
             UpdateCurrIdx(-1);
+        }
+        else if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            DropItem();
         }
     }
     private void UiInventory_OnCurrIdxChange(object sender, EventArgs e)
@@ -49,29 +56,45 @@ public class uiInventory : MonoBehaviour
         UpdateInventoryUI();
     }
 
+    private void DropItem()
+    {
+        Item item = inventory.RemoveItem(currIdx);
+        if (item != null && item != Items.Instance.placeholder)
+        {
+            ItemWorld.DropItem(player.GetPosition(), item);
+        }
+    }
     private void UpdateCurrIdx(int move)
     {
-        currIdx = (currIdx%Inventory.maxInventoryItem + Inventory.maxInventoryItem) % Inventory.maxInventoryItem;
+        //move %= Inventory.maxInventoryItem;
+        currIdx = (currIdx + move + Inventory.maxInventoryItem) % Inventory.maxInventoryItem;
+        Debug.Log(currIdx);
         OnCurrIdxChange?.Invoke(this, EventArgs.Empty);
     }
     private void UpdateInventoryUI()
     {
+        Debug.Log("In Update Ui0");
         int idx = 0;
         foreach (Transform slot in slotParent)
         {
             Image img = slot.GetComponentInChildren<Image>();
             if (idx < inventory.GetItemList().Count)
             {
+                Debug.Log("In Update Ui1");
                 Transform outlineTransform = slot.Find("slotOutline");
-                Image outlineImg = outlineTransform != null ? outlineTransform.GetComponent<Image>() : null;
+                Image outlineImg = outlineTransform != null ? outlineTransform.GetComponentInChildren<Image>() : null;
 
+                if (outlineTransform == null) Debug.Log("outlineNULL");
+                if (outlineImg == null) Debug.Log("outlineImge null");
+                Debug.Log("In Update Ui2");
+              
                 Item item = inventory.GetItemList()[idx];
 
                 if (item == null) Debug.Log("Item null");
                 if (img == null) Debug.Log("Img null");
                 if (img != null)
                 {
-                
+
                     if (item != null && item != Items.Instance.placeholder)
                     {
                         img.sprite = item.itemSprite;
@@ -96,7 +119,10 @@ public class uiInventory : MonoBehaviour
                     }
                 }
             }
-            idx++;
+                idx++;
         }
     }
-}
+
+} 
+
+

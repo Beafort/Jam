@@ -54,6 +54,18 @@ public class Player: MonoBehaviour
        
     }
 
+    public Vector3 GetPosition()
+    {
+        if (this != null)
+        {
+            return this.transform.position;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
+    }
+
     void Start()
     {
         StateMachine.Init(IdleState);
