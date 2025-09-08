@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Item
+[CreateAssetMenu(fileName = "NewItem", menuName = "Items/Item")]
+public class Item : ScriptableObject
 {
-    public enum ItemType
+    public enum Type
     {
         Healing1,
         SanityHealing1,
@@ -11,7 +13,7 @@ public class Item
         totalItems, //also doubled as what to return when having an ivnalid item.
     }
 
-    public ItemType itemType;
+    public Type itemType;
     public int amount;
-
+    public Sprite itemSprite;
 }
