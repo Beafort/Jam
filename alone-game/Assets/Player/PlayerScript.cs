@@ -26,6 +26,7 @@ public class Player: MonoBehaviour
         MovingState = new PlayerMovingState(this, StateMachine);
 
         inventory = new Inventory();
+        ItemWorld.SpawnItemWorld(new Vector3(1, 1), Items.GetItem(Item.ItemType.Healing1));
     }
 
     void Start()

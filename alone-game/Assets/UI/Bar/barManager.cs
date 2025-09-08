@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class barManager : MonoBehaviour
+public class BarManager : MonoBehaviour
 {
     public Image bar;
     static float maxBarVal = 100f;
@@ -18,20 +18,20 @@ public class barManager : MonoBehaviour
         bar.fillAmount = barVal / maxBarVal;
     }
 
-    public void changeBar(float value)
+    public void ChangeBar(float value)
     {
         barVal += value;
         barVal = Mathf.Clamp(barVal, 0, maxBarVal);
         bar.fillAmount = barVal / maxBarVal;
     }
 
-    public void increaseBar(float value)
+    public void IncreaseBar(float value)
     {
-        changeBar(value);
+        ChangeBar(value);
     }
 
-    public void decreaseBar(float value)
+    public void DecreaseBar(float value)
     {
-        changeBar(-value);
+        ChangeBar(-value);
     }
 }
