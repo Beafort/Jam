@@ -13,13 +13,6 @@ public class CombatManager : MonoBehaviour
     private TextMeshProUGUI dialogue;
 
 
-    private void Start()
-    {   
-        dialogue.text = "Hello";
-        playerFirstBar.Init(100,50);
-        playerSecondBar.Init(100);
-    }
-
 
     public void FirstButton()
     {

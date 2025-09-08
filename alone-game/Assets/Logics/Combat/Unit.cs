@@ -1,25 +1,33 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Unit : MonoBehaviour
 {
-    public UnitData data;  
+   
+    public UnitDataSO data;
 
-    public int currentHP { get; private set; }
+    public int CurrentHP { get; private set; }
+
+    // Temporary modifiers
+    private int bonusAttack = 0;
+    
 
     void Awake()
     {
-        currentHP = data.maxHP;
+        CurrentHP = data.MaxHP;
     }
+    public int Damage => Mathf.Max(0, data.Damage + bonusAttack);
 
-    public bool TakeDamage(int dmg)
+    public void AddAttackBuff(int value) => bonusAttack += value;
+    public void RemoveAttackBuff(int value) => bonusAttack -= value;
+    
+    public void TakeDamage(int dmg)
     {
-        currentHP -= dmg;
-
-        if (currentHP <= 0)
-        {
-            currentHP = 0;
-            return true; // Fainted
-        }
-        return false;
+        CurrentHP = Mathf.Max(CurrentHP - dmg, 0);
     }
+
+    public bool IsDead() => CurrentHP <= 0;
+
+    
+    
 }

@@ -1,20 +1,31 @@
-using TMPro; // for TextMeshPro
+using TMPro; 
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+
 
 public class BattleSystem : MonoBehaviour
 {
     public Unit playerPrefab;
     public Unit enemyPrefab;
 
+    public Transform playerBattleStation;
+    public Transform enemyBattleStation;
+
     Unit playerUnit;
     Unit enemyUnit;
 
-    public TMP_Text playerNameText;
-    public TMP_Text playerHPText;
-    public TMP_Text enemyNameText;
-    public TMP_Text enemyHPText;
+    //public TMP_Text playerNameText;
+    //public TMP_Text playerHPText;
+    //public TMP_Text enemyNameText;
+    //public TMP_Text enemyHPText;
+
+    public TMP_Text dialogueText;
+
+    public BattleHUD playerHUD;
+    public BattleHUD enemyHUD;
 
     public Button attackButton;
 
@@ -29,15 +40,20 @@ public class BattleSystem : MonoBehaviour
     void SetupBattle()
     {
         // Spawn units
-        playerUnit = Instantiate(playerPrefab);
-        enemyUnit = Instantiate(enemyPrefab);
+        playerUnit = Instantiate(playerPrefab, playerBattleStation);
+        enemyUnit = Instantiate(enemyPrefab, enemyBattleStation);
 
         // Set UI
-        playerNameText.text = playerUnit.data.unitName;
-        enemyNameText.text = enemyUnit.data.unitName;
 
-        playerHPText.text = $"{playerUnit.currentHP}/{playerUnit.data.maxHP}";
-        enemyHPText.text = $"{enemyUnit.currentHP}/{enemyUnit.data.maxHP}";
+        dialogueText.text = "A wild " + enemyUnit.data.UnitName + " approches...";
+
+        playerHUD.SetHUD(playerUnit);
+        enemyHUD.SetHUD(enemyUnit);
+        //playerNameText.text = playerUnit.data.unitName;
+        //enemyNameText.text = enemyUnit.data.unitName;
+
+        //playerHPText.text = $"{playerUnit.currentHP}/{playerUnit.data.maxHP}";
+        //enemyHPText.text = $"{enemyUnit.currentHP}/{enemyUnit.data.maxHP}";
 
         state = BattleState.PLAYERTURN;
         PlayerTurn();
@@ -58,12 +74,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.data.damage);
-        enemyHPText.text = $"{enemyUnit.currentHP}/{enemyUnit.data.maxHP}";
+        enemyUnit.TakeDamage(playerUnit.Damage);
+        //enemyHPText.text = $"{enemyUnit.currentHP}/{enemyUnit.data.maxHP}";
 
         yield return new WaitForSeconds(1f);
 
-        if (isDead)
+        if (enemyUnit.IsDead())
         {
             state = BattleState.WON;
             EndBattle();
@@ -79,12 +95,12 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        bool isDead = playerUnit.TakeDamage(enemyUnit.data.damage);
-        playerHPText.text = $"{playerUnit.currentHP}/{playerUnit.data.maxHP}";
+        playerUnit.TakeDamage(enemyUnit.Damage);
+        //playerHPText.text = $"{playerUnit.currentHP}/{playerUnit.data.maxHP}";
 
         yield return new WaitForSeconds(1f);
 
-        if (isDead)
+        if (playerUnit.IsDead())
         {
             state = BattleState.LOST;
             EndBattle();
