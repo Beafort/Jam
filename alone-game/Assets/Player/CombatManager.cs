@@ -14,8 +14,10 @@ public class CombatManager : MonoBehaviour
 
 
     private void Start()
-    {
+    {   
         dialogue.text = "Hello";
+        playerFirstBar.Init(100,50);
+        playerSecondBar.Init(100);
     }
 
 
