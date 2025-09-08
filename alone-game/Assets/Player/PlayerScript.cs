@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -11,15 +12,58 @@ public class Player: MonoBehaviour
     public PlayerMovingState MovingState { get; set; }
     #endregion
 
+    #region Inventory
+    //handles player inventory, health, and stuff. 
+    private Inventory inventory;
+    [SerializeField] private uiInventory inventoryUI;
+    #endregion
 
     public bool IsMoving { get; set; }
-    
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("Collision");
+        if (collider.CompareTag("droppedItem"))
+        {
+            ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+            if (itemWorld == null)
+            {
+                Debug.Log("Item World is null");
+                return;
+            }
+
+            if (inventory.AddItem(itemWorld.GetItem()) != null) //sucessfully put item in inventory
+            {
+                itemWorld.DestroySelf();
+            }
+        }
+    }
+
     public void Awake()
     {
         StateMachine = new StateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine);
         MovingState = new PlayerMovingState(this, StateMachine);
+
+        inventory = new Inventory();
+        inventoryUI.SetInventory(inventory);
+        inventoryUI.SetPlayer(this);
+        if (Items.Instance == null) Debug.Log("items inst null");
+        if (Items.Instance.GetItem(Item.Type.Healing1) == null) Debug.Log("Null Item");
+       
+    }
+
+    public Vector3 GetPosition()
+    {
+        if (this != null)
+        {
+            return this.transform.position;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
 
     void Start()
@@ -31,10 +75,10 @@ public class Player: MonoBehaviour
         StateMachine.CurrentPlayerState?.FrameUpdate();
         
     }
-
     private void FixedUpdate()
     {
         StateMachine.CurrentPlayerState?.PhysicsUpdate();
     }
+
 }
  
