@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479869974c7ae4e4c8b4210fcdb1cd2d, type: 3}
   m_Name: Heal1ItemScript
   m_EditorClassIdentifier: Assembly-CSharp::HealItemScript
-  amountHeal: 0
-  scriptType: 1
+  amountHeal: 10

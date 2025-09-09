@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d6840c892d01e458ca5aa336a21b88, type: 3}
   m_Name: Healing1
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemType: 0
-  amount: 1
+  itemID: 0
   itemSprite: {fileID: 4464582344924425882, guid: 5af0a6472dc2ae44485c9ae1cb99bf97, type: 3}
+  itemMaxDurability: 1
+  onUseScripts:
+  - {fileID: 11400000, guid: b9ab21b9f1d6cc04ca52266f0fc5db1b, type: 2}

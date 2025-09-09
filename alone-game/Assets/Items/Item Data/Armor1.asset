@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d6840c892d01e458ca5aa336a21b88, type: 3}
   m_Name: Armor1
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemType: 2
-  amount: 0
+  itemID: 2
   itemSprite: {fileID: -1353551497164233637, guid: 5af0a6472dc2ae44485c9ae1cb99bf97, type: 3}
+  itemMaxDurability: 100
+  onUseScripts: []

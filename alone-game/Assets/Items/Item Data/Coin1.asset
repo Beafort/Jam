@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d6840c892d01e458ca5aa336a21b88, type: 3}
   m_Name: Coin1
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemType: 3
-  amount: 0
+  itemID: 3
   itemSprite: {fileID: -4732728142920327538, guid: f2f940366c2b02f4ea4b6ff6305457cc, type: 3}
+  itemMaxDurability: 1
+  onUseScripts: []
