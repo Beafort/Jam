@@ -45,9 +45,10 @@ public class uiInventory : MonoBehaviour
         {
             DropItem();
         }
-        else if (Keyboard.current.oKey.wasPressedThisFrame)
+        else if (Keyboard.current.uKey.wasPressedThisFrame)
         {
-            inventory.UseItem(inventory.GetItemList()[currIdx]);
+            Debug.Log("Using Item");
+            inventory.UseItem(player, currIdx);
         }
     }
     private void UiInventory_OnCurrIdxChange(object sender, EventArgs e)
@@ -77,24 +78,22 @@ public class uiInventory : MonoBehaviour
     }
     private void UpdateInventoryUI()
     {
-        Debug.Log("In Update Ui0");
         int idx = 0;
         foreach (Transform slot in slotParent)
         {
             Image img = slot.GetComponentInChildren<Image>();
             if (idx < inventory.GetItemList().Count)
             {
-                Debug.Log("In Update Ui1");
                 Transform outlineTransform = slot.Find("slotOutline");
                 Image outlineImg = outlineTransform != null ? outlineTransform.GetComponentInChildren<Image>() : null;
 
                 if (outlineTransform == null) Debug.Log("outlineNULL");
                 if (outlineImg == null) Debug.Log("outlineImge null");
-                Debug.Log("In Update Ui2");
+
               
                 ItemInstance item = inventory.GetItemList()[idx];
 
-                if (item == null) Debug.Log("Item null");
+                //if (item == null) Debug.Log("Item null");
                 if (img == null) Debug.Log("Img null");
                 if (img != null)
                 {

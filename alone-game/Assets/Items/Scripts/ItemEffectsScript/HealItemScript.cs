@@ -7,6 +7,7 @@ public class HealItemScript : ItemScript
     private Type scriptType = Type.Heal;
     public override bool RunScript(Player player, Object obj)
     {
+        Debug.Log("Run Item Script");
         player.Health().IncreaseBar(amountHeal);
         return true; //can always heal. 
     }

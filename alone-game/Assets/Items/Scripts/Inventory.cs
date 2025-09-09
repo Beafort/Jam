@@ -89,15 +89,17 @@ public class Inventory
         return item1;
     }
 
-    public bool UseItem(Player player, int idx)
+    public bool UseItem(Player player, int idx) //return true if item IS USED. 
     {
+        Debug.Log("Entered UseItem");
         if (idx < 0 && idx >= maxInventoryItem) return false; //item isnt used.
         
         ItemInstance item = itemList[idx];
-        if (item == null) return true;
+        if (item == null) return false;
         else
         {
-            item.BreakItem(player, GameObject.Empt)
+            item.UseItem(player, ItemManager.placeholderGameObject);
+            return true;
         }
     }
     public IReadOnlyList<ItemInstance> GetItemList() { return itemList; }

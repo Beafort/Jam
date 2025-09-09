@@ -59,6 +59,7 @@ public class Player: MonoBehaviour
        
 
         healthBar.Init(maxHealth);
+        healthBar.DecreaseBar(50f);
     }
 
     public Vector3 GetPosition()
