@@ -22,9 +22,9 @@ public class Inventory
             itemList.Add(Items.Instance.placeholder);
         }
 
-        AddItem(Items.Instance.GetItem(Item.Type.Healing1), 3);
-        AddItem(Items.Instance.GetItem(Item.Type.Armor1), 0);
-        AddItem(Items.Instance.GetItem(Item.Type.Coin1));
+        AddItem(Items.Instance.GetItem(Item.ID.Healing1), 3);
+        AddItem(Items.Instance.GetItem(Item.ID.Armor1), 0);
+        AddItem(Items.Instance.GetItem(Item.ID.Coin1));
         //addItem(new Item { itemType = })
         Debug.Log("Inventory Started!\n");
     }

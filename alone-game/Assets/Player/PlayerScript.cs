@@ -54,7 +54,7 @@ public class Player: MonoBehaviour
         inventoryUI.SetInventory(inventory);
         inventoryUI.SetPlayer(this);
         if (Items.Instance == null) Debug.Log("items inst null");
-        if (Items.Instance.GetItem(Item.Type.Healing1) == null) Debug.Log("Null Item");
+        if (Items.Instance.GetItem(Item.ID.Healing1) == null) Debug.Log("Null Item");
 
         healthBar.Init(maxHealth);
     }

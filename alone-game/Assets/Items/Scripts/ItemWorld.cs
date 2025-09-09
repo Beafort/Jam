@@ -31,7 +31,7 @@ public class ItemWorld : MonoBehaviour
     public void SetItem(Item item)
     {
         this.item = item;
-        spriteRenderer.sprite = item.itemSprite;
+        spriteRenderer.sprite = item.GetSprite();
        
         BoxCollider2D bc = GetComponent<BoxCollider2D>();
 

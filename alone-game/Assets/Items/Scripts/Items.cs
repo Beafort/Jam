@@ -14,8 +14,8 @@ public class Items : MonoBehaviour
     [SerializeField] private List<Item> allItems = new List<Item>();
     public Item placeholder;
     public Transform itemWorldRender;
-    public Item GetItem(Item.Type type)
+    public Item GetItem(Item.ID id)
     {
-        return allItems[(int)type];
+        return allItems[(int)id];
     }
 }
