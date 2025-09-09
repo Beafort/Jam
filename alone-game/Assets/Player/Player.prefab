@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   inventoryUI: {fileID: 0}
+  maxHealth: 100
+  healthBar: {fileID: 0}
 --- !u!114 &6176908438179405075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,9 +265,37 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 3ff19b079ea4aec48ad482a0d6d3afa2, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 14630d5e-6ae5-4c88-9886-fa8d57a2cdb5
+    m_ActionName: 'NormalUI/Control Inventory[/Keyboard/rightArrow,/Keyboard/leftArrow,/Keyboard/e,/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0a706d39-dd9f-415a-a87b-455662d312d6
+    m_ActionName: 'NormalUI/MoveLeftInventory[/Keyboard/leftArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a108174-da87-45e2-b93d-fc8345b530c7
+    m_ActionName: 'NormalUI/DropItem[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b1b15867-cc1d-4b3c-8b60-c3df55a9742a
+    m_ActionName: 'NormalUI/UseItem[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: 
+  m_DefaultActionMap: df70fa95-8a34-4494-b137-73ab6b9c7d37
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &9083014250004909029

@@ -29,26 +29,54 @@ public class uiInventory : MonoBehaviour
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         OnCurrIdxChange += UiInventory_OnCurrIdxChange;
     }
-    private void Update()
+    //private void Update()
+    //{
+    //    if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+    //    {
+    //        Debug.Log("Moved right");
+    //        UpdateCurrIdx(1);
+    //    }
+    //    else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+    //    {
+    //        Debug.Log("Moved left");
+    //        UpdateCurrIdx(-1);
+    //    }
+    //    else if (Keyboard.current.pKey.wasPressedThisFrame)
+    //    {
+    //        DropItem();
+    //    }
+    //    else if (Keyboard.current.uKey.wasPressedThisFrame)
+    //    {
+    //        Debug.Log("Using Item");
+    //        inventory.UseItem(player, currIdx);
+    //    }
+    //}
+
+    public void MoveCurrIdxRight(InputAction.CallbackContext context)
     {
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        if (context.performed)
         {
-            Debug.Log("Moved right");
             UpdateCurrIdx(1);
         }
-        else if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+    }
+    public void MoveCurrIdxLeft(InputAction.CallbackContext context)
+    {
+        if (context.performed) UpdateCurrIdx(-1);
+    }
+
+    public void UseItem(InputAction.CallbackContext context)
+    {
+        if (context.performed)  inventory.UseItem(player, currIdx);
+    }
+    public void DropItem(InputAction.CallbackContext context)
+    {
+        if (true)
         {
-            Debug.Log("Moved left");
-            UpdateCurrIdx(-1);
-        }
-        else if (Keyboard.current.pKey.wasPressedThisFrame)
-        {
-            DropItem();
-        }
-        else if (Keyboard.current.uKey.wasPressedThisFrame)
-        {
-            Debug.Log("Using Item");
-            inventory.UseItem(player, currIdx);
+            ItemInstance item = inventory.RemoveItem(currIdx);
+            if (item != null && item != ItemManager.placeholderItemInstance)
+            {
+                ItemWorld.DropItem(player.GetPosition(), item);
+            }
         }
     }
     private void UiInventory_OnCurrIdxChange(object sender, EventArgs e)
@@ -61,14 +89,6 @@ public class uiInventory : MonoBehaviour
         UpdateInventoryUI();
     }
 
-    private void DropItem()
-    {
-        ItemInstance item = inventory.RemoveItem(currIdx);
-        if (item != null && item != ItemManager.placeholderItemInstance)
-        {
-            ItemWorld.DropItem(player.GetPosition(), item);
-        }
-    }
     private void UpdateCurrIdx(int move)
     {
         //move %= Inventory.maxInventoryItem;
