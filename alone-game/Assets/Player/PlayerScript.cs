@@ -71,7 +71,7 @@ public class Player: MonoBehaviour
         }
     }
     public float GetHealth() => healthBar.GetBarCurrVal();
-
+    public BarManager Health() => healthBar;
     void Start()
     {
         StateMachine.Init(IdleState);

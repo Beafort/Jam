@@ -1,6 +1,9 @@
+using NUnit.Framework;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEditor.Rendering.Universal;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Items/Item")]
 public class Item : ScriptableObject
@@ -14,25 +17,12 @@ public class Item : ScriptableObject
         totalItems, //also doubled as what to return when having an ivnalid item.
     }
 
-    public enum Type
-    {
-        DefaultType,
-        Consumable,
-        Wearable,
-        Weapons,
-        WorldItem,
-        numTypes,
-    }
     [SerializeField] private ID itemID;
-    [SerializeField] private Type type;
     [SerializeField] private Sprite itemSprite;
 
-    public static event Action<Player, GameObject> OnItemUsed;
-
-
-    #region ItemScripts
-    [SerializeField] private HealingItemScript healingScipt = null;
-    #endregion
+    [SerializeField] private List<ItemScript> scripts;
+    public event Action<Player, GameObject> OnItemUsed;
 
     public Sprite GetSprite() => itemSprite;
 }
+
