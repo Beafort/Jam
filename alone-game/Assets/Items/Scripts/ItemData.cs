@@ -21,7 +21,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private int itemMaxDurability;
 
-    [SerializeField] private List<ItemScript> onUseScripts; //script so use on itemUse. 
+    [SerializeReference] private List<ItemScript> onUseScripts; //script so use on itemUse. 
 
     public static int breakValue = 0;
     public Sprite GetSprite() => itemSprite;

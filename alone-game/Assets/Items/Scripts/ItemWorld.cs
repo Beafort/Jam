@@ -2,39 +2,39 @@ using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
 {
-    private Item item;
+    private ItemInstance item;
     private SpriteRenderer spriteRenderer;
     private static readonly float randDistance = 2f;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    public static ItemWorld SpawnItemWorld(Vector3 pos, Item item)
+    public static ItemWorld SpawnItemWorld(Vector3 pos, ItemInstance item)
     {
-        Debug.Log("In ItemWOrld");
-        Transform transform = Instantiate(Items.Instance.itemWorldRender, pos, Quaternion.identity);
-        Debug.Log("In ItemWOrld1");
+        Transform transform = Instantiate(ItemManager.Instance.itemWorldRender, pos, Quaternion.identity);
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
         if (itemWorld == null) { Debug.Log("IW null"); }
         itemWorld.SetItem(item);
-        Debug.Log("In ItemWOrld2");
         return itemWorld;
     }
 
-    public static ItemWorld DropItem(Vector3 pos, Item item)
+    public static ItemWorld DropItem(Vector3 pos, ItemInstance item)
     {
         float angle = Random.Range(0f, Mathf.PI * 2f);
         Vector3 randDir = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
         randDir *= randDistance;
         return SpawnItemWorld(pos+randDir, item);
     }
-    public void SetItem(Item item)
+    public void SetItem(ItemInstance item)
     {
+        if (item == null || item == ItemManager.placeholderItemInstance)
+        {
+            Debug.Log("item null");
+            return;
+        }
         this.item = item;
-        spriteRenderer.sprite = item.GetSprite();
-       
-        BoxCollider2D bc = GetComponent<BoxCollider2D>();
-
+        spriteRenderer.sprite = item.GetItemData().GetSprite();
+        BoxCollider2D bc = GetComponent<BoxCollider2D>();;
         if (spriteRenderer.sprite != null)
         {
             bc.size = spriteRenderer.sprite.bounds.size;
@@ -43,7 +43,7 @@ public class ItemWorld : MonoBehaviour
 
     }
 
-    public Item GetItem() { return item; }
+    public ItemInstance GetItem() { return item; }
     public void DestroySelf()
     {
         Destroy(gameObject);

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5aa077d9ab7f0d4395352252a73caec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemWorldSpawner
-  item: {fileID: 11400000, guid: 9fabd85546438214692e5e6447434d1b, type: 2}
+  itemData: {fileID: 11400000, guid: 604a24b2ce4f0cd45b0d833b16ac137d, type: 2}
 --- !u!212 &1477711923602355930
 SpriteRenderer:
   m_ObjectHideFlags: 0

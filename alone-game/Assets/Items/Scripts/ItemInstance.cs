@@ -7,7 +7,7 @@ public class ItemInstance
     private ItemData data;
     private int durability;
 
-    public event Action<Player, GameObject> OnItemBreak;
+    public event Action<Player, GameObject, ItemInstance> OnItemBreak;
     public ItemInstance(ItemData data)
     {
         this.data = data;
@@ -31,7 +31,8 @@ public class ItemInstance
 
     public void BreakItem(Player player,  GameObject obj)
     {
-        OnObjectBreak?.Invoke(player, obj);
+        OnItemBreak?.Invoke(player, obj, this);
+        Debug.Log("item borke");
     }
 
     public ItemData GetItemData() => data; 

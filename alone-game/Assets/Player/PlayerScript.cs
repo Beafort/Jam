@@ -36,7 +36,9 @@ public class Player: MonoBehaviour
                 return;
             }
 
-            if (inventory.AddItem(itemWorld.GetItem()) != null) //sucessfully put item in inventory
+            bool success = false;
+            inventory.AddItem(itemWorld.GetItem(), out success);
+            if (success) //sucessfully put item in inventory
             {
                 itemWorld.DestroySelf();
             }
@@ -53,8 +55,8 @@ public class Player: MonoBehaviour
         inventory = new Inventory();
         inventoryUI.SetInventory(inventory);
         inventoryUI.SetPlayer(this);
-        if (Items.Instance == null) Debug.Log("items inst null");
-        if (Items.Instance.GetItem(Item.ID.Healing1) == null) Debug.Log("Null Item");
+        if (ItemManager.Instance == null) Debug.Log("item manager inst null");
+       
 
         healthBar.Init(maxHealth);
     }

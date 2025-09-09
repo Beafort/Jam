@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class HealingItemScript : ItemScript
+[CreateAssetMenu(fileName = "NewHealItemScript", menuName = "Items/ItemScripts/HealItemScript")]
+public class HealItemScript : ItemScript
 {
     [SerializeField] private float amountHeal;
-    [SerializeField] private Type scriptType = Type.Heal;
+    private Type scriptType = Type.Heal;
     public override bool RunScript(Player player, Object obj)
     {
         player.Health().IncreaseBar(amountHeal);

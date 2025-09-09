@@ -45,6 +45,10 @@ public class uiInventory : MonoBehaviour
         {
             DropItem();
         }
+        else if (Keyboard.current.oKey.wasPressedThisFrame)
+        {
+            inventory.UseItem(inventory.GetItemList()[currIdx]);
+        }
     }
     private void UiInventory_OnCurrIdxChange(object sender, EventArgs e)
     {
@@ -58,8 +62,8 @@ public class uiInventory : MonoBehaviour
 
     private void DropItem()
     {
-        Item item = inventory.RemoveItem(currIdx);
-        if (item != null && item != Items.Instance.placeholder)
+        ItemInstance item = inventory.RemoveItem(currIdx);
+        if (item != null && item != ItemManager.placeholderItemInstance)
         {
             ItemWorld.DropItem(player.GetPosition(), item);
         }
@@ -88,16 +92,16 @@ public class uiInventory : MonoBehaviour
                 if (outlineImg == null) Debug.Log("outlineImge null");
                 Debug.Log("In Update Ui2");
               
-                Item item = inventory.GetItemList()[idx];
+                ItemInstance item = inventory.GetItemList()[idx];
 
                 if (item == null) Debug.Log("Item null");
                 if (img == null) Debug.Log("Img null");
                 if (img != null)
                 {
 
-                    if (item != null && item != Items.Instance.placeholder)
+                    if (item != null && item != ItemManager.placeholderItemInstance)
                     {
-                        img.sprite = item.GetSprite();
+                        img.sprite = item.GetItemData().GetSprite();
                         img.color = Color.white;
                     }
                     else

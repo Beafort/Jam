@@ -15,32 +15,44 @@ public class Inventory
 
     public Inventory() //init inventory
     {
+        Debug.Log("Entering Inventory!");
         itemList = new List<ItemInstance>();
 
-        Enumerable.Repeat(ItemManager.placeholderItemInstance, maxInventoryItem).ToList();
+        itemList = Enumerable.Repeat(ItemManager.placeholderItemInstance, maxInventoryItem).ToList();
+        //auto assign itemlist to a list of null
 
-        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Healing1), 3);
-        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Armor1), 0);
+        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Healing1));
+        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Armor1));
         AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Coin1));
         //addItem(new Item { itemType = })
         Debug.Log("Inventory Started!\n");
     }
 
-
     public ItemInstance AddItem(ItemInstance item)
     {
-        for (int i = 0; i < itemList.Count; i++) {
+        bool tmp;
+        return AddItem(item, out tmp);
+    }
+    public ItemInstance AddItem(ItemInstance item, out bool success) //success check whether adding item succeeded
+    {
+        Debug.Log("Entering AddItem");
+        for (int i = 0; i < maxInventoryItem; i++) {
             if (itemList[i] == null || itemList[i] == ItemManager.placeholderItemInstance)
             {
-                return AddItem(item, i);
+                return AddItemIdx(item, i, out success);
             }
         }
-
+        success = false;  
         return null;
     }
-    public ItemInstance AddItem(ItemInstance item, int idx)
+    private ItemInstance AddItemIdx(ItemInstance item, int idx, out bool success)
     {
-        if (idx >= maxInventoryItem || idx < 0) return null; //no item cahnged
+        Debug.Log("Entering AddItemIdx");
+        if (idx >= maxInventoryItem || idx < 0)
+        {
+            success = false;
+            return null; //no item cahnged
+        }
 
         ItemInstance item1 = RemoveItem(idx);
         itemList[idx] = item;
@@ -49,31 +61,44 @@ public class Inventory
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
 
         Debug.Log("Added: " + item.GetItemData().GetID() + " at " + idx);
+        success = true;
         return item1;
     }
 
-    private void Item_OnItemBreak(Player arg1, GameObject arg2)
+    private void Item_OnItemBreak(Player arg1, GameObject arg2, ItemInstance item)//item got used up inside invnentory.
     {
-        throw new NotImplementedException();
+        int idx = itemList.IndexOf(item);
+        if (idx != -1) RemoveItem(idx); //remove instance of item in inventorry if it break in inventory. 
     }
 
     public ItemInstance RemoveItem(int idx)
     {
         if (idx >= maxInventoryItem || idx < 0) return null;
 
+        Debug.Log("removing item at: "+idx);
         ItemInstance item1 = itemList[idx];
         itemList[idx] = ItemManager.placeholderItemInstance;
 
-        item1.OnItemBreak -= Item_OnItemBreak; //unsubcribe from event
+        if (item1 != ItemManager.placeholderItemInstance || item1 != null)
+        {
+            item1.OnItemBreak -= Item_OnItemBreak; //unsubcribe from event if item1 isnt null.
+        }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
 
-        Debug.Log("Removed: " + item1.GetItemData().GetID() + " at " + idx);
+        Debug.Log("Removed: " + (item1 != null ? item1.GetItemData().GetID() : null) + " at " + idx);
         return item1;
     }
 
-    public ItemInstance UseItem(Item item, int idx)
+    public bool UseItem(Player player, int idx)
     {
-        return ItemManager.placeholderItemInstance;
+        if (idx < 0 && idx >= maxInventoryItem) return false; //item isnt used.
+        
+        ItemInstance item = itemList[idx];
+        if (item == null) return true;
+        else
+        {
+            item.BreakItem(player, GameObject.Empt)
+        }
     }
     public IReadOnlyList<ItemInstance> GetItemList() { return itemList; }
 }
