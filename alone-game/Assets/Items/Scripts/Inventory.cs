@@ -1,39 +1,36 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
 public class Inventory
 {
     public static int maxInventoryItem = 10;
-    private List<Item> itemList;
+    private List<ItemInstance> itemList;
     public event EventHandler OnItemListChanged;
 
     public Inventory() //init inventory
     {
-        itemList = new List<Item>();
+        itemList = new List<ItemInstance>();
 
-        for (int i = 0; i < maxInventoryItem; i++)
-        {
-            if (Items.Instance == null) Debug.Log("Instance null");
-            if (Items.Instance.placeholder == null) Debug.Log("placeholder null");
-            if (itemList == null) Debug.Log("Item List null");
-            itemList.Add(Items.Instance.placeholder);
-        }
+        Enumerable.Repeat(ItemManager.placeholderItemInstance, maxInventoryItem).ToList();
 
-        AddItem(Items.Instance.GetItem(Item.ID.Healing1), 3);
-        AddItem(Items.Instance.GetItem(Item.ID.Armor1), 0);
-        AddItem(Items.Instance.GetItem(Item.ID.Coin1));
+        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Healing1), 3);
+        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Armor1), 0);
+        AddItem(ItemManager.Instance.CreateItemInstance(ItemData.ID.Coin1));
         //addItem(new Item { itemType = })
         Debug.Log("Inventory Started!\n");
     }
 
 
-    public Item AddItem(Item item)
+    public ItemInstance AddItem(ItemInstance item)
     {
         for (int i = 0; i < itemList.Count; i++) {
-            if (itemList[i] == null || itemList[i] == Items.Instance.placeholder)
+            if (itemList[i] == null || itemList[i] == ItemManager.placeholderItemInstance)
             {
                 return AddItem(item, i);
             }
@@ -41,28 +38,42 @@ public class Inventory
 
         return null;
     }
-    public Item AddItem(Item item, int idx)
+    public ItemInstance AddItem(ItemInstance item, int idx)
     {
         if (idx >= maxInventoryItem || idx < 0) return null; //no item cahnged
 
-        Item item1 = new Item();
-        item1 = itemList[idx];
+        ItemInstance item1 = RemoveItem(idx);
         itemList[idx] = item;
+
+        item.OnItemBreak += Item_OnItemBreak; //subcribe to newly added item event.
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
-        Debug.Log("Added: " + item.name + " at " + idx);
+
+        Debug.Log("Added: " + item.GetItemData().GetID() + " at " + idx);
         return item1;
     }
 
-    public Item RemoveItem(int idx)
+    private void Item_OnItemBreak(Player arg1, GameObject arg2)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ItemInstance RemoveItem(int idx)
     {
         if (idx >= maxInventoryItem || idx < 0) return null;
 
-        Item item1 = new Item();
-        item1 = itemList[idx];
-        itemList[idx] = Items.Instance.placeholder;
+        ItemInstance item1 = itemList[idx];
+        itemList[idx] = ItemManager.placeholderItemInstance;
+
+        item1.OnItemBreak -= Item_OnItemBreak; //unsubcribe from event
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
-        Debug.Log("Removed: " + item1.name + " at " + idx);
+
+        Debug.Log("Removed: " + item1.GetItemData().GetID() + " at " + idx);
         return item1;
     }
-    public IReadOnlyList<Item> GetItemList() { return itemList; }
+
+    public ItemInstance UseItem(Item item, int idx)
+    {
+        return ItemManager.placeholderItemInstance;
+    }
+    public IReadOnlyList<ItemInstance> GetItemList() { return itemList; }
 }

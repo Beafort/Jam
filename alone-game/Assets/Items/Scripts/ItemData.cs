@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEditor.Rendering.Universal;
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "Items/Item")]
-public class Item : ScriptableObject
+[CreateAssetMenu(fileName = "NewItem", menuName = "Items/ItemData")]
+public class ItemData : ScriptableObject
 {
     public enum ID
     {
@@ -19,10 +19,14 @@ public class Item : ScriptableObject
 
     [SerializeField] private ID itemID;
     [SerializeField] private Sprite itemSprite;
+    [SerializeField] private int itemMaxDurability;
 
-    [SerializeField] private List<ItemScript> scripts;
-    public event Action<Player, GameObject> OnItemUsed;
+    [SerializeField] private List<ItemScript> onUseScripts; //script so use on itemUse. 
 
+    public static int breakValue = 0;
     public Sprite GetSprite() => itemSprite;
+    public ID GetID() => itemID;
+    public int GetMaxDurability() => itemMaxDurability;
+    public IReadOnlyList<ItemScript> getOnUseScripts() => onUseScripts;
 }
 
